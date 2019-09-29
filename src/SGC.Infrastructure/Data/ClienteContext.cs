@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SGC.AppCore.Entity;
+using SGC.Infrastructure.EntityConfig;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,32 +17,21 @@ namespace SGC.Infrastructure.Data
         public DbSet<Contato> Contatos { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Nomeclatura banco
             modelBuilder.Entity<Cliente>().ToTable("Cliente");
             modelBuilder.Entity<Contato>().ToTable("Contato");
+            modelBuilder.Entity<Endereco>().ToTable("Endereco");
+            modelBuilder.Entity<Profissao>().ToTable("Profissao");
+            modelBuilder.Entity<ProfissaoCliente>().ToTable("ProfissaoCliente");
 
-            //Fazer algo pra diminuir repetição de codigo
-            #region Configurações de cliente
-            modelBuilder.Entity<Cliente>().Property(e => e.CPF)
-                .HasColumnType("varchar(11)")
-                .IsRequired();
+            modelBuilder.ApplyConfiguration(new ClienteMap());
+            modelBuilder.ApplyConfiguration(new ContatoMap());
+            modelBuilder.ApplyConfiguration(new ProfissaoMap());
+            modelBuilder.ApplyConfiguration(new EnderecoMap());
+            modelBuilder.ApplyConfiguration(new ProfissaoClienteMap());
+            modelBuilder.ApplyConfiguration(new MenuMap());
 
-            modelBuilder.Entity<Cliente>().Property(e => e.Nome)
-               .HasColumnType("varchar(200)")
-               .IsRequired();
-            #endregion
-            #region Configurações de contato
-
-            modelBuilder.Entity<Contato>().Property(e => e.Nome)
-            .HasColumnType("varchar(200)")
-            .IsRequired();
-
-            modelBuilder.Entity<Contato>().Property(e => e.Email)
-            .HasColumnType("varchar(100)")
-            .IsRequired();
-
-            modelBuilder.Entity<Contato>().Property(e => e.Telefone)
-            .HasColumnType("varchar(15)");
-            #endregion
+       
 
         }
     }
