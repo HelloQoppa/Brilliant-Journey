@@ -7,14 +7,7 @@ namespace SGC.Infrastructure.Data
     public class ContatoMap : IEntityTypeConfiguration<Contato>
     {
         public void Configure(EntityTypeBuilder<Contato> builder)
-        {
-            builder
-                .HasOne(c => c.Cliente)
-                .WithMany(c => c.Contatos)
-                .HasForeignKey(c => c.ClienteId)
-                .HasPrincipalKey(c => c.ClienteId)
-                .OnDelete(DeleteBehavior.Restrict);
-
+        { 
 
             builder.Property(e => e.Nome)
                .HasColumnType("varchar(200)")

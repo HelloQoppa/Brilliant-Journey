@@ -15,6 +15,6 @@ namespace SGC.AppCore.Entity
         public string Telefone{ get; set; }
         public string Email{ get; set; }
         public int ClienteId{ get; set; }
-        public Cliente Cliente { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }

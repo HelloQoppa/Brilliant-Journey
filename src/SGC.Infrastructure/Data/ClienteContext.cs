@@ -15,6 +15,12 @@ namespace SGC.Infrastructure.Data
         }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Contato> Contatos { get; set; }
+
+        public DbSet<Profissao> Profissoes { get; set; }
+        public DbSet<Endereco> Enderecos{ get; set; }
+
+        public DbSet<ProfissaoCliente> ProfissaoClientes{ get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Nomeclatura banco
@@ -29,7 +35,6 @@ namespace SGC.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new ProfissaoMap());
             modelBuilder.ApplyConfiguration(new EnderecoMap());
             modelBuilder.ApplyConfiguration(new ProfissaoClienteMap());
-            modelBuilder.ApplyConfiguration(new MenuMap());
 
        
 
